@@ -10,7 +10,10 @@ packages = [{include = "movielens_ai_playground"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 streamlit = "^1.26.0"
-
+rank-bm25 = "*"
+tqdm = "*"
+sentence-transformers = "*"
+pyvespa = "*"
 
 [build-system]
 requires = ["poetry-core"]

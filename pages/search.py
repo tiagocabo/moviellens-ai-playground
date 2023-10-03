@@ -1,7 +1,7 @@
 import streamlit as st
 
 from movielens_ai_playground.semantic_search.bm25_retrieval import bm25_retrieve
-from movielens_ai_playground.semantic_search.vespa_similar import vespa_semantic_search
+#from movielens_ai_playground.semantic_search.vespa_similar import vespa_semantic_search
 from movielens_ai_playground.utils.UI_utils import plot_row_5
 
 st.set_page_config(layout="wide")
@@ -29,14 +29,17 @@ with st.container():
         )
 if search:
     if retrieval_option == "paraphrase-multilingual-MiniLM-L12-v2":
-        res = vespa_semantic_search(query_text=query, hits=N_option)
-        ids = list(res.keys())
+        #res = vespa_semantic_search(query_text=query, hits=N_option)
+        #ids = list(res.keys())
+        raise NotImplementedError
+
     elif retrieval_option == "bm25_title":
         res = bm25_retrieve(query=query, hits=N_option, bm25_type=retrieval_option)
         ids = list(res)
     elif retrieval_option == "bm25_title_desc":
-        res = bm25_retrieve(query=query, hits=N_option, bm25_type=retrieval_option)
-        ids = list(res)
+        #res = bm25_retrieve(query=query, hits=N_option, bm25_type=retrieval_option)
+        #ids = list(res)
+        raise NotImplementedError
     else:
         raise NotImplementedError
 

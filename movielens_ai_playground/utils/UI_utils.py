@@ -1,18 +1,15 @@
+import pandas as pd
 import requests
 import streamlit as st
 
 
-def streamlit_image(image_path, title, description, no_description):
+def streamlit_image( title, genre, image_path=None):
     st.markdown(f"#### {title}")
     try:
         st.image(image_path)
     except:
         pass
-
-    if not no_description:
-        st.markdown("## DESCRIÇÃO")
-        with st.expander(description[:50]):
-            st.write(description, unsafe_allow_html=True)
+    st.write(genre, unsafe_allow_html=True)
 
 
 def url_builder(id):
@@ -28,81 +25,71 @@ def url_builder(id):
         description = "description"
     return image, title, description
 
+def info_fetcher(id):
+    MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/ml-25m/movies.csv"
+    movies_df = pd.read_csv(MOVIES_PATH)
+    title = movies_df.loc[movies_df.movieId == id, "title"]
+    genre = movies_df.loc[movies_df.movieId == id, "genres"]
+    return title, genre
 
-def plot_image(MAIN_IMAGE_ID, no_description=False):
-    path, title, description = url_builder(MAIN_IMAGE_ID)
+def plot_image(MAIN_IMAGE_ID):
+    title, genre = info_fetcher(MAIN_IMAGE_ID)
     streamlit_image(
-        image_path=path,
         title=title,
-        description=description,
-        no_description=no_description,
+        genre=genre,
     )
 
 @st.cache_data
-def plot_row_5(res, no_description=False):
+def plot_row_5(res):
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         try:
-            path, title, description = url_builder(int(res[0]))
+            title, genre = info_fetcher(int(res[0]))
             streamlit_image(
-                image_path=path,
                 title=title,
-                description=description,
-                no_description=no_description,
+                genre=genre,
             )
-            st.write(int(res[0]))
-        except:
+        except Exception as e:
+            print(e)
             pass
     with col2:
         try:
-            path, title, description = url_builder(int(res[1]))
+            title, genre = info_fetcher(int(res[1]))
             streamlit_image(
-                image_path=path,
                 title=title,
-                description=description,
-                no_description=no_description,
+                genre=genre,
             )
-            st.write(int(res[1]))
 
         except:
             pass
     with col3:
         try:
-            path, title, description = url_builder(int(res[2]))
+            title, genre = info_fetcher(int(res[2]))
             streamlit_image(
-                image_path=path,
                 title=title,
-                description=description,
-                no_description=no_description,
+                genre=genre,
             )
-            st.write(int(res[2]))
 
         except:
             pass
 
     with col4:
         try:
-            path, title, description = url_builder(int(res[3]))
+            title, genre = info_fetcher(int(res[3]))
             streamlit_image(
-                image_path=path,
                 title=title,
-                description=description,
-                no_description=no_description,
+                genre=genre,
             )
-            st.write(int(res[3]))
 
         except:
             pass
     with col5:
         try:
-            path, title, description = url_builder(int(res[4]))
+            title, genre = info_fetcher(int(res[4]))
             streamlit_image(
-                image_path=path,
                 title=title,
-                description=description,
-                no_description=no_description,
+                genre=genre,
             )
-            st.write(int(res[4]))
 
         except:
             pass

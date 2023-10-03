@@ -8,7 +8,7 @@ p_stemmer = PorterStemmer()
 
 def nltk_process(text):
     # Tokenization
-    nltk_tokenList = word_tokenize(language="portuguese", text=text.lower())
+    nltk_tokenList = word_tokenize(language="english", text=text.lower())
 
     # # Stemming
     # nltk_stemedList = []

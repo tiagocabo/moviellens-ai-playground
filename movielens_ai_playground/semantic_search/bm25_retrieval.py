@@ -1,11 +1,12 @@
 import pickle
 
 import numpy as np
-import pandas as pd
 from rank_bm25 import BM25Okapi
 
-MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/ml-25m/movies.csv"
-movies_df = pd.read_csv(MOVIES_PATH)
+from movielens_ai_playground.io.read_data import read_movies_data
+
+MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k/u.item"
+movies_df = read_movies_data(path=MOVIES_PATH)
 
 print("Start building bm25 with titles")
 bm25_title = BM25Okapi(movies_df.title)

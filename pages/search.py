@@ -10,7 +10,7 @@ with st.container():
     with col1:
         retrieval_option = st.selectbox(
             "Retrieval",
-            ("paraphrase-multilingual-MiniLM-L12-v2", "bm25_title", "bm25_title_desc"),
+            ( "bm25_title", "paraphrase-multilingual-MiniLM-L12-v2","bm25_title_desc"),
         )
 
     with col2:

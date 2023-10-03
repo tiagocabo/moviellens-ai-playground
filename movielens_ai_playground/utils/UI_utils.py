@@ -2,14 +2,15 @@ import pandas as pd
 import requests
 import streamlit as st
 
+from movielens_ai_playground.io.read_data import read_movies_data
 
-def streamlit_image( title, genre, image_path=None):
+
+def streamlit_image( title, url=None):
     st.markdown(f"#### {title}")
     try:
-        st.image(image_path)
+        st.image(url)
     except:
         pass
-    st.write(genre, unsafe_allow_html=True)
 
 
 def url_builder(id):
@@ -26,17 +27,21 @@ def url_builder(id):
     return image, title, description
 
 def info_fetcher(id):
-    MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/ml-25m/movies.csv"
-    movies_df = pd.read_csv(MOVIES_PATH)
-    title = movies_df.loc[movies_df.movieId == id, "title"]
-    genre = movies_df.loc[movies_df.movieId == id, "genres"]
-    return title, genre
+    MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k/u.item"
+    movies_df = read_movies_data(path=MOVIES_PATH)
+    title = movies_df.loc[movies_df.movieId == id, "title"].values[0]
+    return title
 
+def url_fetcher(id:int):
+    MOVIES_URL_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k-links/movie_poster.csv"
+    df = pd.read_csv(MOVIES_URL_PATH, names=["movieId","url"])
+    return df.loc[df.movieId == id, "url"].values[0]
 def plot_image(MAIN_IMAGE_ID):
-    title, genre = info_fetcher(MAIN_IMAGE_ID)
+    title = info_fetcher(MAIN_IMAGE_ID)
+    url = url_fetcher(MAIN_IMAGE_ID)
     streamlit_image(
         title=title,
-        genre=genre,
+        url=url,
     )
 
 @st.cache_data
@@ -44,30 +49,33 @@ def plot_row_5(res):
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         try:
-            title, genre = info_fetcher(int(res[0]))
+            title = info_fetcher(int(res[0]))
+            url = url_fetcher(id=int(res[0]))
             streamlit_image(
                 title=title,
-                genre=genre,
+                url=url,
             )
         except Exception as e:
             print(e)
             pass
     with col2:
         try:
-            title, genre = info_fetcher(int(res[1]))
+            title = info_fetcher(int(res[1]))
+            url = url_fetcher(id=int(res[1]))
             streamlit_image(
                 title=title,
-                genre=genre,
+                url=url,
             )
 
         except:
             pass
     with col3:
         try:
-            title, genre = info_fetcher(int(res[2]))
+            title = info_fetcher(int(res[2]))
+            url = url_fetcher(id=int(res[2]))
             streamlit_image(
                 title=title,
-                genre=genre,
+                url=url,
             )
 
         except:
@@ -75,20 +83,22 @@ def plot_row_5(res):
 
     with col4:
         try:
-            title, genre = info_fetcher(int(res[3]))
+            title = info_fetcher(int(res[3]))
+            url = url_fetcher(id=int(res[3]))
             streamlit_image(
                 title=title,
-                genre=genre,
+                url=url,
             )
 
         except:
             pass
     with col5:
         try:
-            title, genre = info_fetcher(int(res[4]))
+            title = info_fetcher(int(res[4]))
+            url = url_fetcher(id=int(res[4]))
             streamlit_image(
                 title=title,
-                genre=genre,
+                url=url,
             )
 
         except:

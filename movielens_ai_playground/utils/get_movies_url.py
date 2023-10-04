@@ -6,7 +6,7 @@ import pandas as pd
 
 row_names = ['movie_id', 'movie_title']
 
-df = pd.read_csv("/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/ml-25m/movies.csv")
+df = pd.read_csv("data/movielens-100k-links/movie_poster.csv")
 
 for idx, row in df.iterrows():
     movie_id = row['movieId']

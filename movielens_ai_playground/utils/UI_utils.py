@@ -27,13 +27,13 @@ def url_builder(id):
     return image, title, description
 
 def info_fetcher(id):
-    MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k/u.item"
+    MOVIES_PATH = "data/movielens-100k/u.item"
     movies_df = read_movies_data(path=MOVIES_PATH)
     title = movies_df.loc[movies_df.movieId == id, "title"].values[0]
     return title
 
 def url_fetcher(id:int):
-    MOVIES_URL_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k-links/movie_poster.csv"
+    MOVIES_URL_PATH = "data/movielens-100k-links/movie_poster.csv"
     df = pd.read_csv(MOVIES_URL_PATH, names=["movieId","url"])
     return df.loc[df.movieId == id, "url"].values[0]
 def plot_image(MAIN_IMAGE_ID):

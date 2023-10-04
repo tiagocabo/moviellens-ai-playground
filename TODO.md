@@ -5,3 +5,4 @@
 4. Is it possible to avoid full reconstruction of the bm25 index after a new item is added? 
 5. Add code formatting
 6. Improve code design
+7. Review costs, and optimize docker image size

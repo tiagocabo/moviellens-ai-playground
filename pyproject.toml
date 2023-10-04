@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "movielens-ai-playground"
+version = "0.1.0"
+description = "Experimenting recommendations systems with movilens dataset"
+authors = ["Tiago Cabo <ttiago.ccabo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "movielens_ai_playground"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.26.0"
+rank-bm25 = "*"
+tqdm = "*"
+sentence-transformers = "*"
+pyvespa = "*"
+beautifulsoup4 = "^4.12.2"
+lxml = "^4.9.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -5,7 +5,7 @@ from rank_bm25 import BM25Okapi
 
 from movielens_ai_playground.io.read_data import read_movies_data
 
-MOVIES_PATH = "/Users/tiago.cabo/Documents/github-repos/moviellens-ai-playground/data/movielens-100k/u.item"
+MOVIES_PATH = "data/movielens-100k/u.item"
 movies_df = read_movies_data(path=MOVIES_PATH)
 
 print("Start building bm25 with titles")

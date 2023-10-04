@@ -2,7 +2,7 @@
 name = "movielens-ai-playground"
 version = "0.1.0"
 description = "Experimenting recommendations systems with movilens dataset"
-authors = ["Tiago Cabo <tiago.cabo@olx.com>"]
+authors = ["Tiago Cabo <ttiago.ccabo@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "movielens_ai_playground"}]

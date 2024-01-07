@@ -1,6 +1,4 @@
-FROM python:3.11-slim
-
-RUN pip install poetry
+FROM python:3.11-slim as build
 
 WORKDIR /code
 
@@ -13,7 +11,13 @@ COPY main.py README.md ./
 COPY pages pages
 
 # Project initialization:
-RUN poetry config virtualenvs.create false && poetry install
-EXPOSE 9090
-CMD [ "streamlit", "run", "main.py", "--server.port", "9090", "--server.address", "0.0.0.0", "--server.headless", "true", "--server.fileWatcherType", "none", "--browser.gatherUsageStats", "false"]
+RUN pip install poetry && poetry config virtualenvs.create false && poetry install
 
+FROM build as streamlit_app
+EXPOSE 9090
+CMD [ "streamlit", "run", "main.py", "--server.port", "9090", "--server.address",
+ "0.0.0.0", "--server.headless", "true", "--server.fileWatcherType",
+  "none", "--browser.gatherUsageStats", "false"]
+
+FROM build as qdrant_feed
+CMD ["python", "./movielens_ai_playground/semantic_search/qdrant_feed.py"]

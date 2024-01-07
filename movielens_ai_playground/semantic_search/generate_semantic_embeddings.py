@@ -24,7 +24,7 @@ def encode_query_text(text):
 
 
 if __name__ == "__main__":
-    path = "/Users/tiago.cabo/Documents/olx-projects/vespa-poc/ads/variant=base/run_id=2023-06-19T07"
+    path = "ads/variant=base/run_id=2023-06-19T07"
     df = pd.DataFrame()
     for file in tqdm(os.listdir(path)):
         print(file)

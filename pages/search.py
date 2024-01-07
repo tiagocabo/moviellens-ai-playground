@@ -1,16 +1,20 @@
 import streamlit as st
 
 from movielens_ai_playground.semantic_search.bm25_retrieval import bm25_retrieve
-#from movielens_ai_playground.semantic_search.vespa_similar import vespa_semantic_search
+from movielens_ai_playground.semantic_search.qdrant_search import Qdrant
 from movielens_ai_playground.utils.UI_utils import plot_row_5
 
 st.set_page_config(layout="wide")
+
+qdrant_client = Qdrant(host="qdrant", port=6333)
+
 with st.container():
     col1, col2, col3 = st.columns(3)
     with col1:
         retrieval_option = st.selectbox(
             "Retrieval",
-            ( "bm25_title", "paraphrase-multilingual-MiniLM-L12-v2","bm25_title_desc"),
+            ( "bm25_title",
+              "paraphrase-multilingual-MiniLM-L12-v2"),
         )
 
     with col2:
@@ -29,17 +33,11 @@ with st.container():
         )
 if search:
     if retrieval_option == "paraphrase-multilingual-MiniLM-L12-v2":
-        #res = vespa_semantic_search(query_text=query, hits=N_option)
-        #ids = list(res.keys())
-        raise NotImplementedError
+        ids = qdrant_client.qdrant_search(query=query, hits=N_option)
 
     elif retrieval_option == "bm25_title":
         res = bm25_retrieve(query=query, hits=N_option, bm25_type=retrieval_option)
         ids = list(res)
-    elif retrieval_option == "bm25_title_desc":
-        #res = bm25_retrieve(query=query, hits=N_option, bm25_type=retrieval_option)
-        #ids = list(res)
-        raise NotImplementedError
     else:
         raise NotImplementedError
 
@@ -47,7 +45,7 @@ if search:
         f"Query {query}, retrieval {retrieval_option},"
         f" N {N_option}, reranker {reranker_option} "
     )
-    st.write(f"Results {res}")
+    st.write(f"Results {ids}")
     if N_option:
         if int(N_option) % 5 == 0:
             for i in range(int(N_option) // 5):

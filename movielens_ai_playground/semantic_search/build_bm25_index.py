@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from movielens_ai_playground.semantic_search.bm25_preprocessing import nltk_process
 
-path = "/Users/tiago.cabo/Documents/olx-projects/vespa-poc/ads/variant=base/run_id=2023-06-19T07"
+path = "ads/variant=base/run_id=2023-06-19T07"
 df = pd.DataFrame()
 for file in tqdm(os.listdir(path)):
     print(file)

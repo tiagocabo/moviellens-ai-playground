@@ -13,11 +13,7 @@ streamlit = "^1.26.0"
 rank-bm25 = "*"
 tqdm = "*"
 sentence-transformers = "*"
-pyvespa = "*"
-beautifulsoup4 = "^4.12.2"
-lxml = "^4.9.3"
-jupyter = "^1.0.0"
-qdrant-client = "^1.6.9"
+qdrant-client = "^1.7.0"
 
 [build-system]
 requires = ["poetry-core"]
